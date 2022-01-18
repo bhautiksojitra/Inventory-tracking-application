@@ -1,0 +1,38 @@
+Enter File Name with extention:
+inputData.txt
+Item : Oats added in the List !
+Item : Shampoo added in the List !
+Item : Juice added in the List !
+Item : Okra added in the List !
+Item : Apples added in the List !
+Success : Item  Okra has been removed !
+Item : Peas added in the List !
+Printing the list of all the items...
+Item name : Apples | Price :  $7.0 | Inventory Count : 23
+Item name : Juice | Price :  $4.99 | Inventory Count : 100
+Item name : Oats | Price :  $1.4 | Inventory Count : 90
+Item name : Peas | Price :  $4.5 | Inventory Count : 12
+Item name : Shampoo | Price :  $3.56 | Inventory Count : 19
+Item : Chips added in the List !
+Failure : Item  HBC not found !
+Printing the list of all the items...
+Item name : Apples | Price :  $7.0 | Inventory Count : 23
+Item name : Chips | Price :  $3.4 | Inventory Count : 17
+Item name : Juice | Price :  $6.99 | Inventory Count : 100
+Item name : Oats | Price :  $1.4 | Inventory Count : 90
+Item name : Peas | Price :  $4.5 | Inventory Count : 12
+Item name : Shampoo | Price :  $3.56 | Inventory Count : 19
+Filtering the list by Name Tag : O
+Item name : Oats | Price :  $1.4 | Inventory Count : 90
+End of Printing...
+Filtering the list by Price : LESS_THAN 3.0
+Item name : Oats | Price :  $1.4 | Inventory Count : 90
+End of Printing...
+Filtering the list by Inventory : MORE_THAN 10
+Item name : Apples | Price :  $7.0 | Inventory Count : 23
+Item name : Chips | Price :  $3.4 | Inventory Count : 17
+Item name : Juice | Price :  $6.99 | Inventory Count : 100
+Item name : Oats | Price :  $1.4 | Inventory Count : 90
+Item name : Peas | Price :  $4.5 | Inventory Count : 12
+Item name : Shampoo | Price :  $3.56 | Inventory Count : 19
+End of Printing...
