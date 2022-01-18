@@ -1,26 +1,15 @@
-import list.Manager;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        Manager me = new Manager();
+        System.out.println("Enter File Name with extention: ");
 
-        me.create("Oats", 3, 10);
-        me.create("Soup", 4, 1);
-        me.create("Milk", 1, 100);
+        Scanner scanFileName = new Scanner(System.in);
+        String fileName = scanFileName.next();
 
-        me.print_list();
-        me.create("Juice", 6, 40);
-        me.create("Cereal", 2, 13);
-
-        me.print_list();
-
-        me.edit_inventory("Oats", 100);
-        me.edit_price("Milk", 2);
-        me.remove("Juice");
-        me.remove("HBC");
-
-        me.print_list();
+        // Initialising the file reader
+        InputProcessor i = new InputProcessor(fileName);
 
     }
 

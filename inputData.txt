@@ -1,0 +1,4 @@
+ADD Oats 1.4 90
+ADD HBC 3.56 19
+ADD Juice 4.99 100
+PRINT
