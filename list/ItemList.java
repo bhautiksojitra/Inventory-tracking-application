@@ -12,61 +12,43 @@ public class ItemList {
 
     protected boolean sorted_add(Item to_add) {
 
-        // creates a new node with the data that we want to insert in the table.
         ItemNode newNode = new ItemNode(to_add, null);
 
-        // if the table is empty already, the node will be added at the front
         if (top == null) {
-            newNode.next_ptr = top;
+            newNode.setNext(top);
             top = newNode;
 
         } else {
-            /*
-             * if the list is not empty then
-             * traverse through the all the elements and gets its right place
-             * in table with the help of two node "Previous" and "Current".
-             */
+
             ItemNode current = top;
             ItemNode previous = null;
 
-            // Loop runs until value is greater than the item or table has no more value to
-            // scan.
-            while (current.data.get_name().compareTo(to_add.get_name()) < 0 && current.next_ptr != null) {
+            while (current.getData().get_name().compareTo(to_add.get_name()) < 0 && current.getNext() != null) {
                 previous = current;
-                current = current.next_ptr;
+                current = current.getNext();
 
             }
 
-            if (current.data.get_name().compareTo(to_add.get_name()) == 0) {
+            if (current.getData().get_name().compareTo(to_add.get_name()) == 0) {
 
                 System.out.println("Failure : Duplicate Item Found !");
                 return false;
             }
-            /*
-             * Here are Three cases of a item to insert in the list
-             * 
-             * 1. item can be inserted in between.
-             * 2. item can be inserted in the beginning.
-             * 3. item can be inserted at the end.
-             * 
-             */
 
-            // if loop stops before the list ends. then 1 and 2 cases can happen.
-            if (current.data.get_name().compareTo(to_add.get_name()) > 0) {
-                newNode.next_ptr = current;
+            if (current.getData().get_name().compareTo(to_add.get_name()) > 0) {
+                newNode.setNext(current);
 
-                // if previous isn't null then 1 else 2.
                 if (previous != null) {
-                    previous.next_ptr = newNode;
+                    previous.setNext(newNode);
                 } else {
                     top = newNode;
                 }
 
             }
-            // the loop goes till the end then will insert the item at the end.
-            else if (current.next_ptr == null) {
-                newNode.next_ptr = null;
-                current.next_ptr = newNode;
+
+            else if (current.getNext() == null) {
+                newNode.setNext(null);
+                current.setNext(newNode);
 
             }
 
@@ -82,26 +64,26 @@ public class ItemList {
             ItemNode prev = null;
             ItemNode curr = top;
 
-            while (curr != null && curr.data.get_name().compareTo(to_remove) != 0) {
+            while (curr != null && curr.getData().get_name().compareTo(to_remove) != 0) {
                 prev = curr;
-                curr = curr.next_ptr;
+                curr = curr.getNext();
             }
 
             if (prev == null) {
 
                 System.out.println("Success : Item  " + to_remove + " has been removed !");
-                top = top.next_ptr;
+                top = top.getNext();
                 list_size--;
 
                 return true;
             }
 
             else if (curr == null) {
-                System.out.println("Failure : Deletion Failed , Item not found !");
+                System.out.println("Failure : Deletion Failed , Item " + to_remove + " not in the List !");
 
-            } else if (curr.data.get_name().compareTo(to_remove) == 0) {
+            } else if (curr.getData().get_name().compareTo(to_remove) == 0) {
                 System.out.println("Success : Item  " + to_remove + " has been removed !");
-                prev.next_ptr = curr.next_ptr;
+                prev.setNext(curr.getNext());
                 list_size--;
                 return true;
             } else {
@@ -119,16 +101,16 @@ public class ItemList {
     protected Item search(String to_find) {
         ItemNode curr = top;
 
-        while (curr != null && curr.data.get_name().compareTo(to_find) != 0) {
-            curr = curr.next_ptr;
+        while (curr != null && curr.getData().get_name().compareTo(to_find) != 0) {
+            curr = curr.getNext();
         }
 
         if (curr == null) {
-            System.out.println("Failure : Item  " + to_find + "not found !");
+            System.out.println("Failure : Item  " + to_find + " not found !");
             return null;
         }
 
-        return curr.data;
+        return curr.getData();
     }
 
     protected int get_size() {
@@ -136,30 +118,121 @@ public class ItemList {
     }
 
     protected void print_list() {
+
+        System.out.println("Printing the list of all the items... ");
         ItemNode curr = top;
 
         if (curr != null) {
             while (curr != null) {
-                System.out.println("Item name : " + curr.data.get_name() +
-                        " Item price : " + curr.data.get_Value() +
-                        " Item_count : " + curr.data.get_Inventory());
+                System.out.println("Item name : " + curr.getData().get_name() +
+                        " | Price :  $" + curr.getData().get_Value() +
+                        " | Inventory Count : " + curr.getData().get_Inventory());
 
-                curr = curr.next_ptr;
+                curr = curr.getNext();
             }
         } else {
             System.out.println("No Item Found in the List !");
         }
     }
 
-    private class ItemNode {
+    protected void filterByPrefix(String tag) {
 
-        private Item data;
-        private ItemNode next_ptr;
+        System.out.println("Filtering the list by Name Tag : " + tag);
 
-        public ItemNode(Item data, ItemNode next_ptr) {
-            this.data = data;
-            this.next_ptr = next_ptr;
+        ItemNode curr = top;
+
+        if (curr != null) {
+
+            while (curr != null) {
+                boolean condition = curr.getData().get_name().startsWith(tag);
+                if (condition) {
+                    System.out.println("Item name : " + curr.getData().get_name() +
+                            " | Price :  $" + curr.getData().get_Value() +
+                            " | Inventory Count : " + curr.getData().get_Inventory());
+                }
+
+                curr = curr.getNext();
+
+            }
         }
+
+        System.out.println("End of Printing...");
+
+    }
+
+    protected void filterByPrice(String more_less, double price) {
+
+        System.out.println("Filtering the list by Price : " + more_less + " " + price);
+
+        ItemNode curr = top;
+
+        if (curr != null) {
+
+            while (curr != null) {
+
+                boolean condition = false;
+                if (more_less.equals("MORE_THAN"))
+                    condition = curr.getData().get_Value() > price;
+                else if (more_less.equals("LESS_THAN"))
+                    condition = curr.getData().get_Value() < price;
+                else if (more_less.equals("EXACT"))
+                    condition = curr.getData().get_Value() == price;
+                else {
+                    System.out.println("FILTER_BY_PRICE command has some errors !");
+                    return;
+                }
+
+                if (condition) {
+
+                    System.out.println("Item name : " + curr.getData().get_name() +
+                            " | Price :  $" + curr.getData().get_Value() +
+                            " | Inventory Count : " + curr.getData().get_Inventory());
+                }
+
+                curr = curr.getNext();
+
+            }
+        }
+
+        System.out.println("End of Printing...");
+
+    }
+
+    protected void filterByStock(String more_less, int count) {
+
+        System.out.println("Filtering the list by Inventory : " + more_less + " " + count);
+
+        ItemNode curr = top;
+
+        if (curr != null) {
+
+            while (curr != null) {
+
+                boolean condition = false;
+                if (more_less.equals("MORE_THAN"))
+                    condition = curr.getData().get_Inventory() > count;
+                else if (more_less.equals("LESS_THAN"))
+                    condition = curr.getData().get_Inventory() < count;
+                else if (more_less.equals("EXACT"))
+                    condition = curr.getData().get_Inventory() == count;
+                else {
+                    System.out.println("FILTER_BY_STOCK command has some errors !");
+                    return;
+                }
+
+                if (condition) {
+
+                    System.out.println("Item name : " + curr.getData().get_name() +
+                            " | Price :  $" + curr.getData().get_Value() +
+                            " | Inventory Count : " + curr.getData().get_Inventory());
+                }
+
+                curr = curr.getNext();
+
+            }
+        }
+
+        System.out.println("End of Printing...");
 
     }
 

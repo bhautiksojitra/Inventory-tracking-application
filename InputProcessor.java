@@ -47,11 +47,24 @@ public class InputProcessor {
                 // the program executes various commands based on the what it reads from the
                 // file
                 if (array[0].equals("ADD")) {
-                    user.create(array[1], Double.parseDouble(array[2]), Double.parseDouble(array[3]));
+                    user.create(array[1], Double.parseDouble(array[2]), Integer.parseInt(array[3]));
                 } else if (array[0].equals("REMOVE")) {
                     user.remove(array[1]);
                 } else if (array[0].equals("PRINT")) {
                     user.print_list();
+                } else if (array[0].equals("PRICE_CHANGE")) {
+                    user.price_change(array[1], Double.parseDouble(array[2]));
+                } else if (array[0].equals("RENAME")) {
+                    user.rename(array[1], array[2]);
+                } else if (array[0].equals("EDIT_INVENTORY")) {
+                    user.edit_inventory(array[1], Integer.parseInt(array[2]));
+
+                } else if (array[0].equals("FILTER_BY_PREFIX")) {
+                    user.filterByPrefix(array[1]);
+                } else if (array[0].equals("FILTER_BY_PRICE")) {
+                    user.filterByPrice(array[1], Double.parseDouble(array[2]));
+                } else if (array[0].equals("FILTER_BY_STOCK")) {
+                    user.filterByStock(array[1], Integer.parseInt(array[2]));
                 } else if (array[0].equals("QUIT")) {
                     System.exit(0);
                 } else {

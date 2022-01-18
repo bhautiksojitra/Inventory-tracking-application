@@ -1,4 +1,29 @@
+# ignore the lines with '#' - are not commands to executes - just info about the metadata
+# ADD item_name price stock_count // adds new item 
+# REMOVE item_name // removes existing item
+# PRINT // prints the whole list (no parameters)
+# PRICE_CHANGE item_name new_price // change the price of teh item
+# RENAME old_name new_name // change the name of the item
+# EDIT_INVENTORY item_name new_count // change the stock Constructor
+# QUIT // ends the execution of the application
+# FILTER_BY_PREFIX prefix_of_item_name // print the list of items start with the given "prefix_of_item_name"
+# FILTER_BY_PRICE "MORE_THAN / LESS_THAN" price // filter the list based on the price given
+# FILTER_BY_STOCK "MORE_THAN /LESS_THAN" count // filter the list based on the stock count. 
+
 ADD Oats 1.4 90
-ADD HBC 3.56 19
+ADD Shampoo 3.56 19
 ADD Juice 4.99 100
+ADD Okra 3.89 2
+ADD Apples 7.00 23
+REMOVE Okra
+ADD Peas 4.5 12
 PRINT
+ADD Chips 3.4 14
+EDIT_INVENTORY Chips 17
+PRICE_CHANGE Juice 6.99
+RENAME HBC health_and_beauty
+PRINT
+FILTER_BY_PREFIX O
+FILTER_BY_PRICE LESS_THAN 3.0
+FILTER_BY_STOCK MORE_THAN 10
+QUIT
